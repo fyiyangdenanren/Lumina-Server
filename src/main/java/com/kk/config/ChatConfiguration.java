@@ -1,0 +1,64 @@
+package com.kk.config;
+
+import com.kk.advisor.RAGAdvisor;
+import com.kk.memory.MySQLChatMemory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.tool.ToolCallbackProvider;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.Ordered;
+import reactor.core.scheduler.Schedulers;
+
+import static com.kk.constants.PromptConstant.SYSTEM_PROMPT;
+
+@Configuration
+@RequiredArgsConstructor
+public class ChatConfiguration {
+    private final OpenAiChatModel chatModel;
+    private final MySQLChatMemory mySQLChatMemory;
+    private final RAGAdvisor ragAdvisor;
+    private final ToolCallbackProvider toolCallbackProvider;
+
+    /**
+     * 配置基于 OpenAI 的重写对话客户端Builder
+     */
+    @Bean("Rewrite")
+    public ChatClient.Builder chatClientBuilder() {
+        return ChatClient.builder(chatModel);
+    }
+
+    /**
+     * 配置基于 MySQL 的持久化会话记忆
+     * 支持跨会话的上下文保持和多轮对话
+     */
+    @Bean
+    @Primary
+    public ChatMemory chatMemory() {
+        return mySQLChatMemory;
+    }
+
+    /**
+     * 配置基于 OpenAI 的对话客户端
+     */
+    @Bean
+    public ChatClient chatClient(ChatMemory chatMemory) {
+        return ChatClient.builder(chatModel)
+                .defaultSystem(SYSTEM_PROMPT)
+                .defaultToolCallbacks(toolCallbackProvider)
+                .defaultAdvisors(
+                        SimpleLoggerAdvisor.builder().build(),
+                        MessageChatMemoryAdvisor.builder(chatMemory).order(Ordered.HIGHEST_PRECEDENCE)
+                                .conversationId(ChatMemory.CONVERSATION_ID)
+                                .scheduler((Schedulers.boundedElastic())).build(),
+                        ragAdvisor
+                )
+                .build();
+    }
+
+}
