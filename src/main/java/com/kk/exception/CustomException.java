@@ -6,6 +6,7 @@ import lombok.Getter;
 public class CustomException extends RuntimeException {
 
     private int code;
+    private String message;
 
     public CustomException() {
 
@@ -13,6 +14,7 @@ public class CustomException extends RuntimeException {
 
     public CustomException(String message, int code) {
         super(message);
+        this.message = message;
         this.code = code;
     }
 

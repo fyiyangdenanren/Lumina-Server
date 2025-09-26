@@ -1,8 +1,6 @@
 package com.kk.handler;
 
-import com.kk.constants.HttpStatus;
 import com.kk.domain.po.R;
-import com.kk.exception.BaseException;
 import com.kk.exception.CustomException;
 import com.kk.exception.ServerException;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +14,13 @@ public class GlobalExceptionHandler {
     /**
      * 处理自定义异常
      *
-     * @param be 异常
+     * @param e 异常
      * @return 返回异常结果R
      */
-    @ExceptionHandler(BaseException.class)
-    public R<String> error(BaseException be) {
-        log.error("运行时异常信息：{}", be.getMessage());
-        return R.fail(be.getMessage());
+    @ExceptionHandler(Exception.class)
+    public R<String> error(Exception e) {
+        log.error("未知异常信息：{}", e.getMessage());
+        return R.fail(e.getMessage());
     }
 
     /**
@@ -49,8 +47,4 @@ public class GlobalExceptionHandler {
         return R.fail(se.getCode(), "请联系工作人员处理");
     }
 
-    @ExceptionHandler(Exception.class)
-    public R<String> handleGenericException(Exception e) {
-        return R.fail( HttpStatus.ERROR,e.getMessage());
-    }
 }

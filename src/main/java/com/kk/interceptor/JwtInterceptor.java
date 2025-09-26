@@ -2,8 +2,6 @@ package com.kk.interceptor;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.kk.constants.HttpStatus;
-import com.kk.exception.CustomException;
 import com.kk.properties.JwtProperties;
 import com.kk.utils.JwtUtil;
 import com.kk.utils.UserContextHolder;
@@ -47,7 +45,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         String tokenKey = LOGIN_USER_TOKEN + userId;
         String redisToken = stringRedisTemplate.opsForValue().get(tokenKey);
         if (redisToken == null || !redisToken.equals(token)) {
-            throw new CustomException("无效账号，请重试", HttpStatus.UNAUTHORIZED);
+            return true;
         }
         // 4.保存用户到上下文
         UserContextHolder.setUserId(userId);
