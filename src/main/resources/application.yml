@@ -9,7 +9,7 @@ spring:
   ai:
     openai:
       base-url: https://dashscope.aliyuncs.com/compatible-mode # 兼容模式
-      api-key: sk-4f439668d4a04b09b83ac8d93b62f59f # API密钥
+      api-key: sk-*****************************f # API密钥
       chat:
         options:
           model: qwen-max # 对话模型
@@ -41,7 +41,7 @@ spring:
           connections:
             Amap:
               url: https://mcp.amap.com
-              endpoint: /mcp?key=f719d513f53109308cbfe65981b20a13
+              endpoint: /mcp?key=*********************
   datasource: # mysql数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lumina?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false
@@ -64,8 +64,8 @@ spring:
   mail: # 邮箱配置
     host: smtp.qq.com #邮件服务器地址
     port: 465 #端口号
-    username: 2869244577@qq.com
-    password: jgdsdnlbbsnhdfcj
+    username: 2869***577@qq.com
+    password: jgdsdnlbbsnh****
     default-encoding: UTF-8 #默认编码格式
     properties:
       mail:
@@ -90,13 +90,13 @@ mybatis-plus: # mybatis-plus配置
       logic-not-delete-value: 0      # 未删除标记值
 lumina:
   jwt:
-    secret-key: fyiyangdenanren
+    secret-key: f**********n*n
     ttl-days: 3
 minio:
   endpoint: http://192.168.88.88:9000
   access-key: root
   secret-key: 12345678
 google:
-  client-id: 532270517013-649669emegrf0s4l71rchc779cpe3fn3.apps.googleusercontent.com
-  client-secret: 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
+  client-id: 532270517013-649669eme*************************.com
+  client-secret: GOCSPX-ByidOlNKF*******7_dxRWYYPTwrj
   user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
