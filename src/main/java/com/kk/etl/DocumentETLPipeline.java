@@ -1,6 +1,7 @@
 package com.kk.etl;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.model.transformer.KeywordMetadataEnricher;
@@ -16,16 +17,17 @@ import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.pdf.config.PdfDocumentReaderConfig;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class DocumentETLPipeline {
-    @Autowired
+
+    @jakarta.annotation.Resource
     private OpenAiChatModel chatModel;
 
     /**
@@ -63,12 +65,11 @@ public class DocumentETLPipeline {
 
         // 5. 执行ETL流水线
         List<Document> documents = pdfReader.read();
-        List<Document> splitDocuments = splitter.apply(documents);
         // List<Document> enrichedDocuments = keywordEnricher.apply(splitDocuments);
 
         // 6. 返回文档
         // return summaryEnricher.apply(enrichedDocuments);
-        return splitDocuments;
+        return splitter.apply(documents);
 
     }
 
@@ -194,7 +195,7 @@ public class DocumentETLPipeline {
                 d.addAll(documents);
 
             } catch (Exception e) {
-                System.err.println("处理文件失败: " + resource.getFilename() + ", 错误: " + e.getMessage());
+                log.error("处理文件失败: {},错误信息: {}", resource.getFilename(), e.getMessage());
             }
         }
         return d;

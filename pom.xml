@@ -90,10 +90,10 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!--mongodb-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- minio -->
         <dependency>
             <groupId>io.minio</groupId>
@@ -187,19 +187,19 @@
             <artifactId>simplemagic</artifactId>
             <version>1.17</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.auth/google-auth-library-oauth2-http -->
+        <!--google-auth-library-oauth2-http-->
         <dependency>
             <groupId>com.google.auth</groupId>
             <artifactId>google-auth-library-oauth2-http</artifactId>
             <version>1.37.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+        <!--google-api-client-->
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
             <version>2.7.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2 -->
+        <!--google-http-client-jackson2-->
         <dependency>
             <groupId>com.google.http-client</groupId>
             <artifactId>google-http-client-jackson2</artifactId>

@@ -9,13 +9,13 @@ spring:
   ai:
     openai:
       base-url: https://dashscope.aliyuncs.com/compatible-mode # 兼容模式
-      api-key: sk-4f439668d4a04b09b83ac8d93b62f59f # API密钥
+      api-key: sk-a89b8db31c624914a579c26a25c703aa # API密钥
       chat:
         options:
-          model: qwen-max # 对话模型
+          model: qwen3-coder-plus # 对话模型
       embedding:
         options:
-          model: text-embedding-v3 # 嵌入模型
+          model: text-embedding-v4 # 嵌入模型
           dimensions: 1024 # 嵌入维度
     mcp:
       client:
@@ -31,9 +31,6 @@ spring:
             WebSearch:
               url: https://dashscope.aliyuncs.com
               sse-endpoint: /api/v1/mcps/WebSearch/sse
-            AntV:
-              url: https://dashscope.aliyuncs.com
-              sse-endpoint: /api/v1/mcps/antv-visualization-chart/sse
             Qtf:
               url: https://dashscope.aliyuncs.com
               sse-endpoint: /api/v1/mcps/qtf_mcp/sse
@@ -42,6 +39,9 @@ spring:
             Amap:
               url: https://mcp.amap.com
               endpoint: /mcp?key=f719d513f53109308cbfe65981b20a13
+            AntV:
+              url: http://192.168.88.88:1122
+              endpoint: /mcp
   datasource: # mysql数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lumina?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false
@@ -54,13 +54,6 @@ spring:
       port: 6379
       database: 8
       connect-timeout: 5000
-    mongodb:
-      uri: mongodb://192.168.88.88:27017/lumina
-      username: root
-      password: 1234
-      host: 192.168.88.88
-      database: lumina
-      port: 27017
   mail: # 邮箱配置
     host: smtp.qq.com #邮件服务器地址
     port: 465 #端口号
@@ -69,13 +62,12 @@ spring:
     default-encoding: UTF-8 #默认编码格式
     properties:
       mail:
-        debug: true #启动debug调试
         smtp:
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory #SSL连接配置
-logging: # 日志配置
-  level:
-    org.springframework.ai.mcp: debug # AI对话的日志级别
+#logging: # 日志配置
+#  level:
+#    org.springframework.ai: debug # AI对话的日志级别
 mybatis-plus: # mybatis-plus配置
   type-aliases-package: com.kk.domain.po # 别名扫描包
   mapper-locations: "classpath*:/mapper/**/*.xml" # Mapper.xml文件地址，默认值
