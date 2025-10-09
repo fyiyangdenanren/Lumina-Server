@@ -23,7 +23,7 @@ public class MySQLChatHistoryController {
     /**
      * 获取会话历史列表
      *
-     * @return
+     * @return 会话列表
      */
     @GetMapping("/getHistories")
     public R<List<ConversationVO>> getHistory() {
@@ -35,8 +35,8 @@ public class MySQLChatHistoryController {
     /**
      * 获取会话详细信息
      *
-     * @param conversationId
-     * @return
+     * @param conversationId 会话id
+     * @return 会话信息
      */
     @GetMapping("/getConversation/{conversationId}")
     public R<List<MessageVO>> getConversation(@PathVariable Long conversationId) {
@@ -50,8 +50,8 @@ public class MySQLChatHistoryController {
     /**
      * 删除会话
      *
-     * @param conversationId
-     * @return
+     * @param conversationId 会话id
+     * @return 删除结果
      */
     @DeleteMapping("/deleteConversation/{conversationId}")
     public R<Void> deleteConversation(@PathVariable Long conversationId) {
@@ -63,8 +63,8 @@ public class MySQLChatHistoryController {
     /**
      * 修改会话
      *
-     * @param conversationVO
-     * @return
+     * @param conversationVO 会话信息
+     * @return 修改结果
      */
     @PutMapping("/updateConversation")
     public R<Void> updateConversation(@RequestBody ConversationVO conversationVO) {

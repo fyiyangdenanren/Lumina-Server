@@ -22,7 +22,6 @@ public class ChatController {
     public Flux<String> chat(@RequestParam(value = "prompt") String prompt, @RequestParam(value = "conversationId") Long conversationId) {
         // 1.保存会话conversation
         mySQLChatHistoryRepository.save(prompt, conversationId);
-        // mongoChatHistoryRepository.save(prompt, conversationId);
         // 2.大模型交互
         return chatService.chatStream(conversationId, prompt);
     }

@@ -19,7 +19,7 @@ public class LoginController {
     /**
      * 密码登录
      *
-     * @param loginDTO
+     * @param loginDTO 登录参数
      * @return String
      */
     @PostMapping("/byPassword")
@@ -31,7 +31,7 @@ public class LoginController {
     /**
      * 手机号登录
      *
-     * @param loginDTO
+     * @param loginDTO 登录参数
      * @return String
      */
     @PostMapping("/byPhone")
@@ -43,7 +43,7 @@ public class LoginController {
     /**
      * 谷歌邮箱方式登录
      *
-     * @param body
+     * @param body 谷歌邮箱登录参数
      * @return String
      */
     @PostMapping("/byGoogleMail")
@@ -55,7 +55,7 @@ public class LoginController {
     /**
      * 邮箱方式登录
      *
-     * @param email,code
+     * @param email,code 邮箱验证码
      * @return String
      */
     @PostMapping("/byEmail")

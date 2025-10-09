@@ -39,7 +39,7 @@ public class UserController {
     /**
      * 添加用户
      *
-     * @param user
+     * @param user 用户
      * @return Void
      */
     @PostMapping("/addUser")
@@ -51,7 +51,7 @@ public class UserController {
     /**
      * 删除用户
      *
-     * @param userId
+     * @param userId 用户id
      * @return Void
      */
     @DeleteMapping("/deleteUser/{userId}")
@@ -63,7 +63,7 @@ public class UserController {
     /**
      * 修改用户
      *
-     * @param user
+     * @param user  用户
      * @return Void
      */
     @PutMapping("/updateUser")
@@ -75,7 +75,7 @@ public class UserController {
     /**
      * 根据id查询用户
      *
-     * @param userId
+     * @param userId 用户id
      * @return User
      */
     @GetMapping("/getUserById/{userId}")
@@ -87,7 +87,7 @@ public class UserController {
     /**
      * 获取用户列表
      *
-     * @param userQuery
+     * @param userQuery 查询参数
      * @return List<UserVO>
      */
     @GetMapping("/list/getUsers")
@@ -99,7 +99,7 @@ public class UserController {
     /**
      * 获取用户分页列表
      *
-     * @param userQuery
+     * @param userQuery 查询参数
      * @return PageDTO<UserVO>
      */
     @GetMapping("/page/getUsers")
